@@ -5,11 +5,12 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        for n in nums:
-            complement = target - n
-            if complement in nums:
-                if complement == n:
-                    if nums.count(n) > 1:
-                        return [nums.index(n), nums.index(n, nums.index(n) + 1)]
-                else:
-                    return [nums.index(n), nums.index(complement)]
+        seen = {}
+        for i, n in enumerate(nums):
+            compliment = target - n
+
+            if compliment in seen:
+                return [seen[compliment], i]
+            
+            seen[n] = i
+            
